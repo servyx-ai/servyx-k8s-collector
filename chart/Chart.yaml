@@ -4,9 +4,9 @@ description: Servyx Kubernetes infrastructure collector — read-only agent that
 type: application
 version: 0.1.0
 appVersion: "0.1.0"
-home: https://github.com/marcus-gomes-v/servyx-k8s-collector
+home: https://github.com/servyx-ai/servyx-k8s-collector
 sources:
-  - https://github.com/marcus-gomes-v/servyx-k8s-collector
+  - https://github.com/servyx-ai/servyx-k8s-collector
 keywords:
   - kubernetes
   - monitoring

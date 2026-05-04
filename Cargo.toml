@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 description = "Servyx Kubernetes infrastructure collector — read-only agent that collects cluster state and sends it to Servyx."
 license = "MIT"
-repository = "https://github.com/marcus-gomes-v/servyx-k8s-collector"
+repository = "https://github.com/servyx-ai/servyx-k8s-collector"
 
 [dependencies]
 kube = { version = "0.98", features = ["runtime", "client", "derive"] }

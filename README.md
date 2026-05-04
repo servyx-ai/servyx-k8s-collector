@@ -29,7 +29,7 @@ Register your cluster on the Servyx dashboard and generate a collector token.
 
 ```bash
 helm install servyx-collector \
-  oci://ghcr.io/marcus-gomes-v/servyx-k8s-collector \
+  oci://ghcr.io/servyx-ai/servyx-k8s-collector \
   --set collector.clusterId=<YOUR_CLUSTER_ENDPOINT> \
   --set collector.servyxUrl=https://app.servyx.ai \
   --set collector.token=<YOUR_COLLECTOR_TOKEN> \
@@ -49,7 +49,7 @@ The collector runs as a CronJob every 6 hours by default. Your cluster data will
 | `collector.servyxUrl` | Servyx platform URL | `""` (required) |
 | `collector.token` | Collector token from Servyx | `""` (required) |
 | `collector.schedule` | Cron schedule for collection | `"0 */6 * * *"` |
-| `image.repository` | Container image | `ghcr.io/marcus-gomes-v/servyx-k8s-collector` |
+| `image.repository` | Container image | `ghcr.io/servyx-ai/servyx-k8s-collector` |
 | `image.tag` | Image tag | `0.1.0` |
 | `resources.requests.cpu` | CPU request | `50m` |
 | `resources.requests.memory` | Memory request | `64Mi` |

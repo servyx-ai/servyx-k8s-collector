@@ -1,5 +1,5 @@
 image:
-  repository: ghcr.io/marcus-gomes-v/servyx-k8s-collector
+  repository: ghcr.io/servyx-ai/servyx-k8s-collector
   tag: "0.1.0"
   pullPolicy: IfNotPresent
 
