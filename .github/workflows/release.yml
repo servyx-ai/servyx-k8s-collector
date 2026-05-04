@@ -58,4 +58,4 @@ jobs:
 
       - name: Push Helm chart to GHCR
         run: |
-          helm push servyx-k8s-collector-${{ steps.version.outputs.VERSION }}.tgz oci://${{ env.REGISTRY }}/$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')
+          helm push servyx-k8s-collector-chart-${{ steps.version.outputs.VERSION }}.tgz oci://${{ env.REGISTRY }}/$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')

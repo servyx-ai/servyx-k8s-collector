@@ -1,5 +1,5 @@
 apiVersion: v2
-name: servyx-k8s-collector
+name: servyx-k8s-collector-chart
 description: Servyx Kubernetes infrastructure collector — read-only agent that collects cluster state and sends it to Servyx.
 type: application
 version: 0.1.0
