@@ -205,7 +205,7 @@ async fn main() -> Result<()> {
                         "name": d.metadata.name.as_deref().unwrap_or(""),
                         "namespace": d.metadata.namespace.as_deref().unwrap_or(""),
                         "desired": d.status.as_ref().map(|s| s.desired_number_scheduled),
-                        "ready": d.status.as_ref().and_then(|s| s.number_ready),
+                        "ready": d.status.as_ref().map(|s| s.number_ready),
                     })
                 })
                 .collect();
