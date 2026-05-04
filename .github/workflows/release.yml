@@ -30,11 +30,17 @@ jobs:
         id: version
         run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
 
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
           context: .
           push: true
+          platforms: linux/amd64,linux/arm64
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.version.outputs.VERSION }}
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
@@ -44,6 +50,10 @@ jobs:
 
       - name: Package Helm chart
         run: |
+          # Update chart version and image tag to match release
+          sed -i "s/^version:.*/version: ${{ steps.version.outputs.VERSION }}/" chart/Chart.yaml
+          sed -i "s/^appVersion:.*/appVersion: \"${{ steps.version.outputs.VERSION }}\"/" chart/Chart.yaml
+          sed -i "s/tag:.*/tag: \"${{ steps.version.outputs.VERSION }}\"/" chart/values.yaml
           helm package chart/ --version ${{ steps.version.outputs.VERSION }} --app-version ${{ steps.version.outputs.VERSION }}
 
       - name: Push Helm chart to GHCR
