@@ -1,7 +1,7 @@
 image:
   repository: ghcr.io/servyx-ai/servyx-k8s-collector
   tag: "0.1.0"
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 
 collector:
   # Your cluster identifier (EKS endpoint or cluster name)
