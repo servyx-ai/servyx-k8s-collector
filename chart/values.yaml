@@ -1,0 +1,29 @@
+image:
+  repository: ghcr.io/marcus-gomes-v/servyx-k8s-collector
+  tag: "0.1.0"
+  pullPolicy: IfNotPresent
+
+collector:
+  # Your cluster identifier (EKS endpoint or cluster name)
+  clusterId: ""
+  # Servyx platform URL (e.g. https://app.servyx.ai)
+  servyxUrl: ""
+  # Collector token generated from the Servyx dashboard
+  token: ""
+  # Collection schedule (cron format) — default every 6 hours
+  schedule: "0 */6 * * *"
+
+serviceAccount:
+  create: true
+  name: servyx-collector
+
+rbac:
+  create: true
+
+resources:
+  limits:
+    cpu: 200m
+    memory: 256Mi
+  requests:
+    cpu: 50m
+    memory: 64Mi

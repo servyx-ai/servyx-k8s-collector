@@ -1,0 +1,42 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: servyx-k8s-collector
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: servyx-k8s-collector
+    app.kubernetes.io/instance: {{ .Release.Name }}
+spec:
+  schedule: {{ .Values.collector.schedule | quote }}
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      backoffLimit: 2
+      template:
+        metadata:
+          labels:
+            app.kubernetes.io/name: servyx-k8s-collector
+        spec:
+          serviceAccountName: {{ .Values.serviceAccount.name }}
+          containers:
+            - name: collector
+              image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+              imagePullPolicy: {{ .Values.image.pullPolicy }}
+              command:
+                - servyx-k8s-collector
+                - collect
+              args:
+                - --cluster-id
+                - $(CLUSTER_ID)
+                - --servyx-url
+                - $(SERVYX_URL)
+                - --token
+                - $(SERVYX_TOKEN)
+              envFrom:
+                - secretRef:
+                    name: servyx-collector-config
+              resources:
+                {{- toYaml .Values.resources | nindent 16 }}
+          restartPolicy: OnFailure
